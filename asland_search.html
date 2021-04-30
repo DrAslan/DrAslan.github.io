@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Aslan Searcher</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link href="https://cdn.usebootstrap.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+  <style type="text/css">
+    @font-face {
+      font-family: sci;
+      src: url('/data/sci.ttf');
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #2A2E37;
+    }
+
+    .search {
+      width: 100px;
+      height: 100px;
+      margin: 40px auto 0;
+      background-color: #242628;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+
+    .search:before {
+      content: "";
+      display: block;
+      width: 3px;
+      height: 100%;
+      position: relative;
+      background-color: #00FEDE;
+      transition: all 0.5s ease;
+    }
+
+    .search.open {
+      width: 420px;
+    }
+
+    .search.open:before {
+      height: 60px;
+      margin: 20px 0 20px 30px;
+      position: absolute;
+    }
+
+    .search-box {
+      width: 100%;
+      height: 100%;
+      box-shadow: none;
+      border: none;
+      background: transparent;
+      color: #fff;
+      padding: 20px 100px 20px 45px;
+      font-size: 40px;
+      font-family: sci;
+      color: #00FEDE;
+    }
+
+    .search-box:focus {
+      outline: none;
+    }
+
+    .search-button {
+      width: 100px;
+      height: 100px;
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 20px;
+      cursor: pointer;
+    }
+
+    .search-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      border: 3px solid #00FEDE;
+      display: block;
+      position: relative;
+      margin-left: 5px;
+      transition: all 0.5s ease;
+    }
+
+    .search-icon:before {
+      content: "";
+      width: 3px;
+      height: 15px;
+      position: absolute;
+      right: -2px;
+      top: 30px;
+      display: block;
+      background-color: #00FEDE;
+      transform: rotate(-45deg);
+      transition: all 0.5s ease;
+    }
+
+    .search-icon:after {
+      content: "";
+      width: 3px;
+      height: 15px;
+      position: absolute;
+      right: -12px;
+      top: 40px;
+      display: block;
+      background-color: #00FEDE;
+      transform: rotate(-45deg);
+      transition: all 0.5s ease;
+    }
+
+    .open .search-icon {
+      margin: 0;
+      width: 60px;
+      height: 60px;
+      border-radius: 60px;
+    }
+
+    .open .search-icon:before {
+      transform: rotate(52deg);
+      right: 22px;
+      top: 23px;
+      height: 18px;
+    }
+
+    .open .search-icon:after {
+      transform: rotate(-230deg);
+      right: 22px;
+      top: 13px;
+      height: 18px;
+    }
+
+    .mytitle {
+      color: #00FEDE;
+      font-size: 80px;
+      font-family: sci;
+      height: auto;
+      padding: 100px auto 0;
+      overflow: auto;
+      transition: all 0.5s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <canvas id="mainCanvas" style="position: absolute;"></canvas>
+  </div>
+  <div class="d-flex flex-column justify-content-center align-items-center"
+    style="width: 100%; height: 100%; position: absolute;">
+    <div class="text-center mytitle">
+      Asland Search
+    </div>
+    <form class="search" action="https://cn.bing.com/search">
+      <input name="q" type="search" class="search-box">
+      <span class="search-button">
+        <span class="search-icon"></span>
+      </span>
+    </form>
+  </div>
+  <script>
+    $(function () {
+      function w() {
+        h.globalCompositeOperation = "source-over";
+        h.fillStyle = "rgba(42,46,55," + v + ")";
+        h.fillRect(0, 0, f, k);
+        h.globalCompositeOperation = "lighter";
+        .75 > v && (v += .05);
+        D = s - x;
+        E = t - y;
+        x = s;
+        y = t;
+        for (var a = f / 1.15, l = f / 8, p = f / 2, r = Math.random, F = Math.abs, w = Math.sqrt, A = Math.cos, B = Math.sin, C = Math.atan2, G = 1350;
+          G--;) {
+          var e = H[G], g = e.x, c = e.y, d = e.vX, b = e.vY, q = g - s, m = c - t, n = w(q * q + m * m), m = C(m, q), q = A(m), m = B(m);
+          if (z && n < p) var u = 14 * (1 - n / p), d = d + (q * u + .5 - r()), b = b + (m * u + .5 - r());
+          n < a && (u = (1 - n / a) * f * .0014, d -= q * u, b -= m * u);
+          n < l && (n = (1 -
+            n / l) * f * 2.2E-4, d += D * n, b += E * n);
+          d *= .96;
+          b *= .96;
+          F(d);
+          F(b);
+          g += d;
+          c += b;
+          g > f ? g -= f : 0 > g && (g = f + g);
+          c > k ? c -= k : 0 > c && (c = k + c);
+          e.vX = d;
+          e.vY = b;
+          e.x = g;
+          e.y = c;
+          d = e;
+          b = g / f * Math.PI * 2;
+          c = c / k * Math.PI;
+          b = { theta: b, phi: c, x: -100 * Math.sin(c) * Math.sin(b), y: -100 * Math.cos(c), z: -100 * Math.sin(c) * Math.cos(b) };
+          d.pos3D = b;
+          e.pos3D.z -= 200;
+          -299 > e.pos3D.z || (d = 300 / (300 + e.pos3D.z), b = e.pos3D.x * d + f / 2, c = e.pos3D.y * d + k / 2, h.fillStyle = e.color, h.beginPath(), h.arc(b, c, d, 0, I, !0), h.closePath(), h.fill())
+        }
+      }
+      function r(a) {
+        f = document.documentElement.clientWidth;
+        k = document.documentElement.clientHeight;
+        p.width = f;
+        p.height = k
+      }
+      function A(a) {
+        a = a ? a : window.event;
+        s = x = a.pageX;
+        t = y = a.pageY;
+        document.onmousemove = B
+      }
+      function B(a) {
+        a = a ? a : window.event;
+        s = a.pageX;
+        t = a.pageY
+      }
+      function C(a) {
+        z = !0;
+        return !1
+      }
+      function J(a) { return z = !1 }
+      function K() {
+        this.color = "rgb(" + Math.floor(255 * Math.random()) + "," + Math.floor(255 * Math.random()) + "," + Math.floor(255 * Math.random()) + ")";
+        this.size = this.vY = this.vX = this.x = this.y = 0;
+        this.pos3D = { x: 0, y: 0, z: 100 }
+      } var p, h, f = 1E3, k = 560, H = [], I = 2 * Math.PI, v = 0, s, t, D = 0, E = 0, x = 0, y = 0, z = !1;
+
+      p = document.getElementById("mainCanvas");
+      if (p.getContext) {
+        h = p.getContext("2d");
+        window.moveTo(0, 0);
+        window.resizeTo(screen.width, screen.height);
+        r(null);
+        for (var a = 1350;
+          a--;) {
+          var l = new K;
+          l.x = .5 * f;
+          l.y = .5 * k;
+          l.vX = Math.cos(a) * Math.random() * 40;
+          l.vY = Math.sin(a) * Math.random() * 20;
+          l.size = 2;
+          H[a] = l
+        }
+        p.onmousedown = C;
+        p.onmouseup = J;
+        document.onmousemove = A;
+        window.onresize = r;
+        r(null);
+        setInterval(w, 33);
+      }
+    });
+  </script>
+  <script id="rendered-js">
+    $('.search-button').click(function () {
+      let parent = $(this).parent();
+      if (parent.hasClass('open') && $('input').val().trim())
+        $('.search').submit();
+      else
+        parent.toggleClass('open');
+    });
+  </script>
+</body>
+
+</html>
